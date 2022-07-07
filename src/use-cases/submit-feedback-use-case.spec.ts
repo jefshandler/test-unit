@@ -25,12 +25,13 @@ describe("Submit feedback", () => {
         screenshot:
           "data:image/png;base64,asm.djnfm,ncv,mnajklsdhfajsdnflmtest.jpg",
       })
-    ).resolves.not.toThrow();
+    ).resolves.not.toThrow(); //espero um acerto, sem um disparo de erro
 
     expect(createFeedbackSpy).toHaveBeenCalled();
     expect(sendMailSpy).toHaveBeenCalled();
   });
 
+  //espero que nao seja possivel mandar um feedback sem o TYPE
   it("should not be able to submit a feedback without type", async () => {
     await expect(
       submitFeedback.execute({
@@ -39,9 +40,10 @@ describe("Submit feedback", () => {
         screenshot:
           "data:image/png;base64,asm.djnfm,ncv,mnajklsdhfajsdnflmtest.jpg",
       })
-    ).rejects.toThrow();
+    ).rejects.toThrow(); //esperando um erro de retorno
   });
 
+  //espero que nao seja possivel mandar um feedback sem o COMENTARIO
   it("should not be able to submit a feedback without comment", async () => {
     await expect(
       submitFeedback.execute({
@@ -50,9 +52,10 @@ describe("Submit feedback", () => {
         screenshot:
           "data:image/png;base64,asm.djnfm,ncv,mnajklsdhfajsdnflmtest.jpg",
       })
-    ).rejects.toThrow();
+    ).rejects.toThrow(); //esperando um erro de retorno
   });
 
+  //espero que nao seja possivel mandar um feedback om uma Screan invalida
   it("should not be able to submit a feedback with invalid screenshot", async () => {
     await expect(
       submitFeedback.execute({
@@ -60,6 +63,6 @@ describe("Submit feedback", () => {
         comment: "ta tudo bugado",
         screenshot: "test.jpg",
       })
-    ).rejects.toThrow();
+    ).rejects.toThrow(); //esperando um erro de retorno
   });
 });
